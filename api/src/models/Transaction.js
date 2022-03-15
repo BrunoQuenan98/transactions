@@ -3,20 +3,22 @@ const { DataTypes, UUIDV4 } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('user', {
-    id:{
-      type: DataTypes.UUID,
-      defaultValue:DataTypes.UUIDV4,
-      primaryKey: true,
+  sequelize.define('transaction', {
+    concept: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    email: {
+    amount:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password:{
-      type: DataTypes.STRING,
-      allowNull: false,
+    date:{
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    type:{
+        type:DataTypes.ENUM('ingreso', 'egreso'),
+        allowNull: false
     }
   });
 };
