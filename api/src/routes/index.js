@@ -9,7 +9,6 @@ const router = Router();
 
 const verifyUserBd = async (req, res, next) =>{
     const {email} = req.body;
-    console.log(req.body);
     try{
     const user = await User.findAll({where:{email}});
     if(user.length){
@@ -36,9 +35,22 @@ const validateUser = async (req, res, next) =>{
     next();
     }catch(e){
         console.error(e.message);
-        res.send('Invalid token');
+        return res.json('Invalid token');
     }
 }
+
+router.get('/is-verify',validateUser,(req, res)=>{
+    const user = req.user;
+    try {
+        if(user) return res.json(true);
+        return res.json(false);
+    } catch (error) {
+        console.error(error.message);
+        res.json('error del servidor');
+    }
+    
+
+})
 
 router.post('/register',verifyUserBd ,async (req, res) =>{
 
@@ -90,7 +102,7 @@ router.post('/transactions', validateUser, async (req, res) =>{
     res.json(transaction);
     }catch(e){
         console.error(e.message);
-        res.send('error del servidor');
+        res.json('Error del servidor');
     }
 });
 
@@ -106,14 +118,49 @@ router.get('/transactions', validateUser, async(req, res) =>{
     }
 });
 
+router.delete('/transactions/:id', validateUser, async(req,res) =>{
+    const { id } = req.params;
+    try {
+        await Transaction.destroy({
+            where: {
+              id,
+            },
+          });
+          res.json({removed : true});
+    } catch (e) {
+        console.log(e.message);
+        res.json('error en el servidor')
+    }
+})
+
+router.put('/transactions/:id', validateUser, async(req,res) =>{
+    const { id } = req.params;
+    try {
+        const updateTransaction = await Transaction.update(req.body, {
+            where: {
+              id,
+            },
+            returning: true,
+          });
+          return res.json(updateTransaction[1]);
+    } catch (error) {
+        console.log(error.message);
+        return res.json('error del servidor');
+    }
+    
+      
+})
+
 router.get('/balance', validateUser, async(req,res) =>{
     const user = req.user;
     try{
     const userBd = await User.findAll({where: {email : user}});
     const transactions = await Transaction.findAll({where:{userId:userBd[0].id},include:{model : User, attributes:["email"]}});
     if(!transactions.length) return res.json(0);
-    const balancePositive = transactions.filter(t =>t.type === 'ingreso').map(t => Number(t.amount)).reduce((prev, curr)=>prev+curr);
-    const balanceNegative = transactions.filter(t =>t.type === 'egreso').map(t => Number(t.amount)).reduce((prev, curr)=>prev+curr);
+    let balancePositive = transactions.filter(t =>t.type === 'ingreso');
+    balancePositive = balancePositive.length ? balancePositive.map(t => Number(t.amount))?.reduce((prev, curr)=>prev+curr) : 0;
+    let balanceNegative = transactions.filter(t =>t.type === 'egreso');
+    balanceNegative = balanceNegative.length ? balanceNegative.map(t => Number(t.amount))?.reduce((prev, curr)=>prev+curr) : 0;
     const balance = balancePositive - balanceNegative;
     return res.json(balance);
     }catch(e){
