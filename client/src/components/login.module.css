@@ -1,0 +1,68 @@
+.form{
+    background-color: rgb(177, 177, 177);
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: min-content;
+    margin: 0 auto;
+    border: none;
+    box-shadow: 0px 0px 10px black;
+}
+.input{
+    outline: none;
+    border: none;
+    background-color: rgb(41, 41, 41);
+}
+
+.emailConteiner {
+    display: flex;
+    flex-direction: row;
+
+}
+.iconConteiner{
+    background-color: rgb(41, 41, 41);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+.passwordConteiner{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.btnSubmitConteiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    min-width: 50px;
+}
+.btnSubmit:disabled{
+    background-color: rgb(177, 177, 177);
+    cursor: not-allowed;
+    border: none;
+}
+.btnSubmit{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(41, 41, 41);
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.btnSubmit:hover{
+    background-color: black;
+    color: rgb(140, 0, 255);
+}
+.btnSubmit:disabled{
+    background-color: rgb(177, 177, 177);
+    cursor: not-allowed;
+    border: none;
+    color: black;
+}
+
