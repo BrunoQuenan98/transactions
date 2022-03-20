@@ -41,14 +41,15 @@ export const Login = ({setLogged}) =>{
     }
 
 
-    return(<>
+    return(<div className={s.conteiner}>
+        <h1>Log<span className={s.letter}>in</span></h1>
         <form onSubmit={(e) => handleSubmit(e)} className={s.form}>
         <div>
         <div className={s.emailConteiner}>
             <div className={s.iconConteiner}>
          <FontAwesomeIcon icon={faEnvelope} className='fa-camera fa-xl'/>
          </div>
-            <input type="email" name="email" className={s.input} placeholder="Email" value={inputs.email} onChange={(e) => handleInputChange(e)}/>
+            <input autoComplete="off" type="email" name="email" className={s.input} placeholder="Email" value={inputs.email} onChange={(e) => handleInputChange(e)}/>
         </div>
         <div className={s.passwordConteiner}>
         <div className={s.iconConteiner}>
@@ -62,5 +63,5 @@ export const Login = ({setLogged}) =>{
         <button className={s.btnSubmit} type="submit" name="submit" disabled={Object.keys(errors).length ? true : false}>{<FontAwesomeIcon icon={faArrowRightToBracket} className='faArrowRightToBracket fa-xl'/>}</button>
         </div>
         </form>
-    </>)
+    </div>)
 }

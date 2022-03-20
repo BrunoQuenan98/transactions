@@ -1,0 +1,31 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.179), rgba(0, 0, 0, 0.07)); 
+    height: 6vh;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btnCreate{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 100%;
+}
+.btnCreate:hover{
+    color: rgb(140, 0, 255);
+    cursor: pointer;
+}
+.logout{
+    background-color: transparent;
+    width: max-content;
+    outline: none;
+    border: none;
+    font-size: 100%;
+    margin: 3%;
+    margin-right: 6%;
+}
+.logout:hover{
+    color: rgb(140, 0, 255);
+    cursor: pointer;
+}

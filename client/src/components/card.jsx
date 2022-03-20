@@ -1,6 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import s from './card.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
 
 const validateErrors = (atributtes) =>{
     let errors = {}
@@ -50,15 +54,14 @@ export const Card = ({removed, setRemoved, transaction}) =>{
         
     }
 
-    return(<div>
+    return(<div className={s.conteiner}>
         <form onSubmit={(e) => handleSubmit(e)}>
-        {type === 'ingreso' ? '🟢' : '🔴' }
-        <input type='text' name="amount" onChange={e => handleInputChange(e)} value={atributtes.amount}/>
-        <input type='concept' name="concept" onChange={e => handleInputChange(e)} value={atributtes.concept}/>
-        <input type='date' name="date" onChange={e => handleInputChange(e)} value={atributtes.date}/>
-        <input type='submit' disabled={Object.keys(errors).length ? true : false} value='📝'/>
-        <input type='button' value='❌' onClick={() => handleRemove(transaction.id)}/>
+        {transaction.type && type === 'ingreso' ? '🟢' : '🔴' }
+        <input type='text' className={s.input} name="amount" onChange={e => handleInputChange(e)} value={atributtes.amount}/>
+        <input type='concept' className={s.input} name="concept" onChange={e => handleInputChange(e)} value={atributtes.concept}/>
+        <input type='date' className={s.input} name="date" onChange={e => handleInputChange(e)} value={atributtes.date}/>
+        <button type='submit' className={s.input} disabled={Object.keys(errors).length ? true : false}>{<FontAwesomeIcon icon={faPenToSquare} />}</button>
         </form>
-        
+        <button onClick={() => handleRemove(transaction.id)}><FontAwesomeIcon icon={faCircleXmark} /></button>
     </div>)
 }

@@ -2,11 +2,14 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import s from './register.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faKey, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 
 const validateErrors = (inputs) =>{
     let errors = {};
-    if(!inputs.email)errors.email = 'Field required';
-    if(!inputs.password)errors.password = 'Field required';
+    if(!inputs.email)errors.error = `Some field it's missing`;
+    if(!inputs.password)errors.error = `Some field it's missing`;
     return errors;
 }
 
@@ -37,19 +40,27 @@ export const Register = ({setLogged}) =>{
         }
     }
 
-    return(<>
-        <form onSubmit={(e) => handleSubmit(e)}>
+    return(<div className={s.conteiner}>
+        <h1>Sign<span className={s.letter}>in</span></h1>
+        <form onSubmit={(e) => handleSubmit(e)} className={s.form}>
         <div>
-            <label>Email address</label>
-            <input type="email" name="email" value={inputs.email} onChange={(e) => handleInputChange(e)}/>
-            {errors.email && <span>{errors.email}</span>}
+        <div className={s.emailConteiner}>
+            <div className={s.iconConteiner}>
+         <FontAwesomeIcon icon={faEnvelope} className='fa-camera fa-xl'/>
+         </div>
+            <input type="email" name="email" className={s.input} placeholder="Email" value={inputs.email} onChange={(e) => handleInputChange(e)}/>
         </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" value={inputs.password} onChange={(e) => handleInputChange(e)}/>
-            {errors.password && <span>{errors.password}</span>}
+        <div className={s.passwordConteiner}>
+        <div className={s.iconConteiner}>
+        <FontAwesomeIcon icon={faKey} className='fa-key fa-xl'/>
         </div>
-        <button type="submit" name="submit" disabled={Object.keys(errors).length ? true : false}>Create</button>
+            <input type="password" className={s.input} placeholder="Password" name="password" value={inputs.password} onChange={(e) => handleInputChange(e)}/>
+        </div>
+         {errors.error && <span>{errors.error}</span>}
+        </div>
+        <div className={s.btnSubmitConteiner}>
+        <button className={s.btnSubmit} type="submit" name="submit" disabled={Object.keys(errors).length ? true : false}>{<FontAwesomeIcon icon={faArrowRightToBracket} className='faArrowRightToBracket fa-xl'/>}</button>
+        </div>
         </form>
-    </>)
+    </div>)
 }

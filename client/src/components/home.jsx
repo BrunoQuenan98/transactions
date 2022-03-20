@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Card } from './card';
-import s from './home.module.css'
+import s from './home.module.css';
+import { Navbar } from "./navbar";
 
 export const Home = ({setLogged}) =>{
      
@@ -52,16 +53,16 @@ export const Home = ({setLogged}) =>{
         console.log(toast);
         toast('Bye bye!')
     }
-    const handlePostTransaction = async() =>{
-        
-    }
+    
 
     return(<div className={s.conteiner}>
-        <Link to='/create-transaction'>
-        <button onClick={handlePostTransaction}>Create transaction</button>
-        </Link>
-        <button className={s.logout} onClick={handleLogout}>Logout</button>
-        <h1>{balance}</h1>
-        {allTransactions.length ? allTransactions.map(t => <Card removed={removed} setRemoved={setRemoved} transaction={t}/>) : <span>No hay transacciones</span>}
+        <Navbar handleLogout={handleLogout}/>
+        <div className={s.bodyConteiner}>
+        <div className={s.headerConteiner}>
+        <span className={s.title}>Hi, Bruno!</span>
+        <span className={s.balance}>Your balance: <span className={balance >= 0 ? s.valueBalancePos : s.valueBalanceNeg}>${balance}</span></span>
+        </div>
+        {allTransactions.length ?<div className={s.cardConteiner}>{allTransactions.map((t,i) =><Card key={i}removed={removed} setRemoved={setRemoved} transaction={t}/>)}</div>  : <span>No hay transacciones</span>}
+        </div>
     </div>)
 }

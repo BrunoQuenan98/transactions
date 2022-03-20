@@ -6,7 +6,6 @@
     margin-top: 10vh;
 }
 
-
 .form{
     background-color: rgb(177, 177, 177);
     display: flex;
@@ -17,7 +16,6 @@
     border: none;
     box-shadow: 0px 0px 10px black;
 }
-
 .letter{
     color: rgb(140, 0, 255);
 }
@@ -45,9 +43,6 @@
     display: flex;
     flex-direction: row;
 }
-
-
-
 .btnSubmitConteiner{
     display: flex;
     align-items: center;
@@ -78,4 +73,3 @@
     border: none;
     color: black;
 }
-
