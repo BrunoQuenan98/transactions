@@ -1,0 +1,49 @@
+@media screen and (max-width : 200px) {
+    .conteiner{
+        background-color: red;
+    }
+}
+
+.conteiner{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.content{
+    background-color: rgb(14, 14, 14);
+    padding: 10vh;
+    text-align: center;
+}
+.inputConteiner{
+    display: flex;
+    flex-direction: column;
+}
+.inputText{
+    background-color: transparent;
+    border: 1px solid rgb(140, 0, 255);
+    border-radius: 30vh;
+    padding: 2vh;
+    outline: none;
+}
+.inputDate{
+    background-color: transparent;
+    border: 1px solid rgb(140, 0, 255);
+    border-radius: 30vh;
+    padding: 2vh;
+    outline: none;
+}
+.inputType{
+    background-color: transparent;
+    border: 1px solid rgb(140, 0, 255);
+    border-radius: 30vh;
+    padding: 2vh;
+    outline: none;
+}
+.errors{
+    color: rgb(255, 0, 55);
+    font-size: 2vh;
+    margin-right: 15vh;
+}

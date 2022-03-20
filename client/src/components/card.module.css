@@ -8,8 +8,18 @@
     margin: 3vh;
     
 }
-
+.typeIngress{
+    padding-left: 1.3vh;
+    margin-right: 2vh;
+    color:rgb(140, 0, 255)
+}
+.typeEgress{
+    padding-left: 1.3vh;
+    margin-right: 2vh;
+    color: rgb(255, 0, 55);
+}
 .input{
+    padding-inline-start:0;
     font-family: 'Fredoka', sans-serif;
     max-width: 50%;
     max-height: 5vh;
@@ -19,8 +29,30 @@
     background-color: transparent;
 }
 .input[type='submit']{
+    margin-left: 5vh;
+    border-left: 2px solid rgb(140, 0, 255);
+    padding-left: 2vh;
+    height:100%;
+    color: rgb(140, 0, 255);
+}
+.input[type='submit']:hover{
+    cursor: pointer;
+    color: rgb(186, 113, 245);
+}
+.btnRemove{
+    background-color: transparent;
     margin: 0;
     border: none;
-   height:100%;
-   background:blue;
+    height:100%;
+    color: rgb(140, 0, 255);
+    padding-right: 2vh;
+}
+.btnRemove:hover{
+    cursor: pointer;
+    color: rgb(186, 113, 245);
+}
+
+.form{
+    padding: 0;
+    margin: 0;
 }

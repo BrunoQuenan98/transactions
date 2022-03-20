@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import s from './createTransaction.module.css';
 
 const validateErrors = (inputs) =>{
     let errors = {};
@@ -45,32 +46,34 @@ export const CreateTransaction = () =>{
     }
 
     return(<>
-        <form onSubmit={e => handleSubmit(e)}>
-        <div>
+        <form onSubmit={e => handleSubmit(e)} className={s.conteiner}>
+            <div className={s.content}>
+        <div className={s.inputConteiner}>
             <label>Concept</label>
-            <input type="text" name="concept" value={inputs.concept} onChange={(e) => handleInputChange(e)}/>
-            {errors.concept && <span>{errors.concept}</span>}
+            <input maxlength="30" className={s.inputText} type="text" name="concept" value={inputs.concept} onChange={(e) => handleInputChange(e)}/>
+            {errors.concept && <span className={s.errors}>{errors.concept}</span>}
         </div>
-        <div>
+        <div className={s.inputConteiner}>
             <label>Amount</label>
-            <input type="text" name="amount" value={inputs.amount} onChange={(e) => handleInputChange(e)}/>
-            {errors.amount && <span>{errors.amount}</span>}
+            <input className={s.inputText} type="text" name="amount" value={inputs.amount} onChange={(e) => handleInputChange(e)}/>
+            {errors.amount && <span className={s.errors}>{errors.amount}</span>}
         </div>
-        <div>
+        <div className={s.inputConteiner}>
             <label>Date</label>
-            <input type="date" name="date" value={inputs.date} onChange={(e) => handleInputChange(e)}/>
-            {errors.date && <span>{errors.date}</span>}
+            <input className={s.inputDate} type="date" name="date" value={inputs.date} onChange={(e) => handleInputChange(e)}/>
+            {errors.date && <span className={s.errors}>{errors.date}</span>}
         </div>
-        <div>
+        <div className={s.inputConteiner}>
             <label>Type</label>
-            <select name="type" onChange={(e) => handleInputChange(e)}>
+            <select className={s.inputType} name="type" onChange={(e) => handleInputChange(e)}>
                 <option name="ingreso"  value="ingreso">Ingress</option>
                 <option name="egreso" value="egreso">Egress</option>
             </select>
-            {errors.type && <span>{errors.type}</span>}
+            {errors.type && <span className={s.errors}>{errors.type}</span>}
         </div>
 
         <button type="submit" name="submit" disabled={Object.keys(errors).length ? true : false}>Create</button>
+        </div>
         </form>
     </>)
 

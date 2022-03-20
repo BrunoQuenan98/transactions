@@ -5,12 +5,15 @@
     height: 6vh;
     align-items: center;
     justify-content: flex-end;
+    font-family: 'Fredoka', sans-serif;
 }
 .btnCreate{
     background-color: transparent;
     outline: none;
     border: none;
     font-size: 100%;
+    font-weight: bolder;
+    font-family: 'Fredoka', sans-serif;
 }
 .btnCreate:hover{
     color: rgb(140, 0, 255);

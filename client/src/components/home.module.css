@@ -33,10 +33,11 @@
 }
 .cardConteiner{
     margin: 0 auto;
-    background-color: rgb(16, 16, 16);
+    background-image: linear-gradient(to right, rgb(16, 16, 16), rgb(22, 22, 22));
     width: max-content;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 3vh;
+    border-radius: 40px;
 }

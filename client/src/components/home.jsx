@@ -62,7 +62,7 @@ export const Home = ({setLogged}) =>{
         <span className={s.title}>Hi, Bruno!</span>
         <span className={s.balance}>Your balance: <span className={balance >= 0 ? s.valueBalancePos : s.valueBalanceNeg}>${balance}</span></span>
         </div>
-        {allTransactions.length ?<div className={s.cardConteiner}>{allTransactions.map((t,i) =><Card key={i}removed={removed} setRemoved={setRemoved} transaction={t}/>)}</div>  : <span>No hay transacciones</span>}
+        {allTransactions.length ?<div className={s.cardConteiner}>{allTransactions.map((t,i) =><Card id={t.id} name={t.id} key={i}removed={removed} setRemoved={setRemoved} transaction={t}/>)}</div>  : <span>No hay transacciones</span>}
         </div>
     </div>)
 }
