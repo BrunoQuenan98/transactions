@@ -39,6 +39,18 @@ const validateUser = async (req, res, next) =>{
     }
 }
 
+const verifyInputs = async (req,res,next) =>{
+
+    const { concept , amount, date, type } = req.body;
+    if(!concept) return res.json('Field concept incompleted');
+    if(!amount) return res.json('Field amount incompleted');
+    if(Number.isNaN(Number(amount))) return res.json('Only numbers can be included in Amount');
+    if(!date) return res.json('Field date incompleted');
+    if(!type) return res.json('Field type incompleted');
+
+    next();
+} 
+
 router.get('/is-verify',validateUser,(req, res)=>{
     const user = req.user;
     try {
@@ -90,7 +102,7 @@ router.post('/login',verifyUserBd ,async (req, res) =>{
     }
 });
 
-router.post('/transactions', validateUser, async (req, res) =>{
+router.post('/transactions', validateUser, verifyInputs, async (req, res) =>{
 
     const user = req.user;
     const { concept , amount, date, type } = req.body;
@@ -135,6 +147,7 @@ router.delete('/transactions/:id', validateUser, async(req,res) =>{
 
 router.put('/transactions/:id', validateUser, async(req,res) =>{
     const { id } = req.params;
+    console.log(req.params);
     try {
         const updateTransaction = await Transaction.update(req.body, {
             where: {

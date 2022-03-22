@@ -16,7 +16,7 @@ const validateErrors = (atributtes) =>{
 
 export const Card = ({removed, setRemoved, transaction}) =>{
     const { amount, type, concept, date, id } = transaction;
-    const [atributtes, setAtributtes] = useState({amount, date, concept});
+    const [atributtes, setAtributtes] = useState({amount, date, concept, id, type});
     const [errors, setErrors] = useState(validateErrors(atributtes));
 
     const handleInputChange = (e) =>{
@@ -42,12 +42,12 @@ export const Card = ({removed, setRemoved, transaction}) =>{
     const handleSubmit = async(e) =>{
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3001/transactions/${e.id}`,atributtes,{
+            const response = await axios.put(`http://localhost:3001/transactions/${atributtes.id}`,atributtes,{
             headers:{ token : localStorage.token }
         });
         
         removed ? setRemoved(false) : setRemoved(true);
-        toast.success(`The transaction with id:${transaction.id} was modificated`);
+        toast.success(`The transaction with id:${atributtes.id} was modificated`);
         } catch (error) {
             console.error(error.message);
         }
@@ -56,14 +56,17 @@ export const Card = ({removed, setRemoved, transaction}) =>{
     }
 
     return(<div className={s.conteiner}>
-        <form onSubmit={(e) => handleSubmit(e)} className={s.form}>
-        <input type="hidden" name='id' value={id}/>
-        {transaction.type && type === 'ingreso' ? <span className={s.typeIngress}><FontAwesomeIcon icon={faCircleCheck} /></span> : <span className={s.typeEgress}><FontAwesomeIcon icon={faCircleMinus}/></span>}
+        <form name="form" onSubmit={(e) => handleSubmit(e)} className={s.form}>
+        <input type="hidden" name='id' value={atributtes.id}/>
+        {atributtes.type && atributtes.type === 'ingreso' ? <span className={s.typeIngress}><FontAwesomeIcon icon={faCircleCheck} /></span> : <span className={s.typeEgress}><FontAwesomeIcon icon={faCircleMinus}/></span>}
         <input type='text' className={s.input} name="amount" onChange={e => handleInputChange(e)} value={atributtes.amount}/>
         <input type='concept' className={s.input} name="concept" onChange={e => handleInputChange(e)} value={atributtes.concept}/>
         <input type='date' className={s.input} name="date" onChange={e => handleInputChange(e)} value={atributtes.date}/>
+        <div className={s.btnsConteiner}>
         <button type='submit' className={s.input} disabled={Object.keys(errors).length ? true : false}>{<FontAwesomeIcon icon={faPenToSquare} />}</button>
+        <div className={s.btnRemove} onClick={() => handleRemove(atributtes.id)}><FontAwesomeIcon icon={faCircleXmark} /></div>
+        </div>
         </form>
-        <button className={s.btnRemove} onClick={() => handleRemove(transaction.id)}><FontAwesomeIcon icon={faCircleXmark} /></button>
+        
     </div>)
 }

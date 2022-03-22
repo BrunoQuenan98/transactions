@@ -1,5 +1,36 @@
+@media screen and (min-width : 700px) {
+    .cardConteiner{
+        margin: 0 auto;
+        background-image: linear-gradient(to right, rgb(16, 16, 16), rgb(22, 22, 22));
+        width: max-content;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 3vh;
+        border-radius: 40px;
+    }
+}
+@media screen and (max-width : 700px) {
+    .cardConteiner{
+        width: 100%;
+        background-image: linear-gradient(to right, rgb(16, 16, 16), rgb(22, 22, 22));
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+    }
+}
+.spanEmpty{
+    width: 100%;
+    text-align: center;
+    color: rgb(255, 0, 55);
+}
+
+
+
 .conteiner{
     height: 100%;
+    padding-bottom: 20vh;
 }
 .bodyConteiner{
     display: flex;
@@ -30,14 +61,4 @@
 }
 .valueBalanceNeg{
     color: rgb(255, 0, 55);
-}
-.cardConteiner{
-    margin: 0 auto;
-    background-image: linear-gradient(to right, rgb(16, 16, 16), rgb(22, 22, 22));
-    width: max-content;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 3vh;
-    border-radius: 40px;
 }
