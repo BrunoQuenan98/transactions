@@ -25,7 +25,7 @@ export const Home = ({setLogged}) =>{
     }
     const getBalance = async() =>{
         try {
-            const response = await axios.get('http://localhost:3001/balance',{
+            const response = await axios.get('http://localhost:3001/transactions/balance',{
             headers : { token : localStorage.token}
         })
             setBalance(response.data);
@@ -59,7 +59,7 @@ export const Home = ({setLogged}) =>{
         <Navbar handleLogout={handleLogout}/>
         <div className={s.bodyConteiner}>
         <div className={s.headerConteiner}>
-        <span className={s.title}>Hi, Bruno!</span>
+        <span className={s.title}>Transactions</span>
         <span className={s.balance}>Your balance: <span className={balance >= 0 ? s.valueBalancePos : s.valueBalanceNeg}>${balance}</span></span>
         </div>
         {allTransactions.length ?<div className={s.cardConteiner}>{allTransactions.map(t =><Card key={t.id} removed={removed} setRemoved={setRemoved} transaction={t}/>)}</div>  : <span className={s.spanEmpty}>No hay transacciones!</span>}

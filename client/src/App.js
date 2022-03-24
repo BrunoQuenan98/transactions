@@ -20,7 +20,7 @@ function App() {
   const isAuth = async() =>{
     try {
       
-      const response = await axios.get('http://localhost:3001/is-verify',{
+      const response = await axios.get('http://localhost:3001/auth/is-verify',{
       headers:{token: localStorage.getItem('token')}
     })
     console.log(response.data);
@@ -40,11 +40,10 @@ function App() {
 
   return(
   <Routes>
-    
-    <Route path='/login' element={!logged ? <Login setLogged={setLogged}/> : <Navigate to='/home'/>}/>
+    <Route path='/' element={!logged ? <Login setLogged={setLogged}/> : <Navigate to='/home'/>}/>
     <Route path='/register' element={!logged ? <Register setLogged={setLogged}/> : <Navigate to='/home'/>}/>
-    <Route path='/home' element={logged ? <Home setLogged={setLogged}/> : <Navigate to='/login'/>}/>
-    <Route path='/create-transaction' element={logged ? <CreateTransaction /> : <Navigate to='/login'/>}/>
+    <Route path='/home' element={logged ? <Home setLogged={setLogged}/> : <Navigate to='/'/>}/>
+    <Route path='/create-transaction' element={logged ? <CreateTransaction /> : <Navigate to='/'/>}/>
   </Routes>
   )
 }

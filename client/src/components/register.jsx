@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import s from './register.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faKey, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 const validateErrors = (inputs) =>{
     let errors = {};
@@ -26,7 +27,7 @@ export const Register = ({setLogged}) =>{
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/register',inputs);
+            const response = await axios.post('http://localhost:3001/auth/register',inputs);
             if(response.data.token){
             localStorage.setItem('token', response.data.token);
             setLogged(true);
@@ -62,5 +63,8 @@ export const Register = ({setLogged}) =>{
         <button className={s.btnSubmit} type="submit" name="submit" disabled={Object.keys(errors).length ? true : false}>{<FontAwesomeIcon icon={faArrowRightToBracket} className='faArrowRightToBracket fa-xl'/>}</button>
         </div>
         </form>
+        <Link to='/'>
+            If you already have an account click here!
+        </Link>
     </div>)
 }
